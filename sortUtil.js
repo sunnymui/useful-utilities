@@ -4,20 +4,30 @@ export const ascendingSort = (a, b) => a - b;
 // high to low / new to old
 export const descendingSort = (a, b) => b - a;
 
+// sort array of objs using a key value with the sorter fn
+export const sortObjsByValue = (key, items, sorter) => {
+  return [...items].sort((a, b) => {
+    const aValue = a?.[key];
+    const bValue = b?.[key];
+
+    return sorter(aValue, bValue);
+  });
+};
+
 export const sortUsingSortOrderMap = (orderMap, items, sorter) => {
   // sort the array of items based on the sort value for the corresponding
   // item in the sort order map using the sorter function, which should follow a format like:
   /*
     {
-      TOTAL: 8,
-      D54P: 7,
-      D53P: 6,
-      D53G: 5,
-      D52G: 4,
-      N104: 3,
-      D79: 2,
-      B389: 1,
-      N84: 0,
+      John: 8,
+      Adam: 7,
+      Siri: 6,
+      Dos: 5,
+      Mike: 4,
+      Nike: 3,
+      Darren: 2,
+      Bert: 1,
+      Neelix: 0,
     }
   */
   const bySortOrderMap = (a, b) => {
